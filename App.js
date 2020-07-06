@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 
 export default class App extends Component {
@@ -59,7 +59,15 @@ export default class App extends Component {
           <Text>Bonjour, je m'appelle {this.state.firstname} {this.state.lastname}</Text>
         </View>
 
-        {schizophreniaList}
+        {/* <ScrollView>
+          {schizophreniaList}
+        </ScrollView> */}
+
+        <FlatList
+          data={this.state.people}
+          renderItem={({item}) => <Text style={styles.person}>{item.firstname} {item.lastname}</Text>}
+          keyExtractor={item => item.id.toString()}
+        />
       </View>
     );
   }
