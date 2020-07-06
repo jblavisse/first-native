@@ -6,29 +6,60 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default class App extends Component {
   state = {
-    pen: "Lyreco"
+    firstname: "",
+    lastname: "",
+
+    people: [
+      {id: 1, firstname: "Jb", lastname: "Lavisse"},
+      {id: 2, firstname: "Jb", lastname: "Lavisse"},
+      {id: 3, firstname: "Jb", lastname: "Lavisse"},
+      {id: 4, firstname: "Jb", lastname: "Lavisse"},
+      {id: 5, firstname: "Jb", lastname: "Lavisse"},
+      {id: 6, firstname: "Jb", lastname: "Lavisse"},
+      {id: 7, firstname: "Jb", lastname: "Lavisse"},
+      {id: 8, firstname: "Jb", lastname: "Lavisse"},
+      {id: 9, firstname: "Jb", lastname: "Lavisse"},
+      {id: 10, firstname: "Jb", lastname: "Lavisse"},
+      {id: 11, firstname: "Jb", lastname: "Lavisse"},
+      {id: 12, firstname: "Jb", lastname: "Lavisse"},
+      {id: 13, firstname: "Jb", lastname: "Lavisse"}
+    ]
   }
 
-  changePen = (text) => {
+  changeFirstname = (text) => {
     this.setState({
-      pen: text
+      firstname: text
+    })
+  }
+
+  changeLastname = (text) => {
+    this.setState({
+      lastname: text
     })
   }
 
   render() {
+    let schizophreniaList = this.state.people.map(person => {
+      return <Text style={styles.person}>{person.firstname} {person.lastname}</Text>
+    });
+
     return (
       <View style={styles.container}>
-
-        <TextInput style={styles.input} 
-          value={this.state.pen} onChangeText={text => this.changePen(text)} />
-
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Mon crayon c'est un {this.state.pen}</Text>
+        <View style={styles.formInput}>
+          <Text>Nom: </Text>
+          <TextInput style={styles.input}  keyboardType="number-pad"
+            value={this.state.lastname} onChangeText={text => this.changeLastname(text)} />
         </View>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text style={styles.text}>Coucou <Text>http://www.google.com</Text></Text>
-  
-        {/* <Button title="STOP" color="#06bb1a" onPress={this.changePen} /> */}
+        <View style={styles.formInput}>
+          <Text>Prénom: </Text>
+          <TextInput style={styles.input} 
+            value={this.state.firstname} onChangeText={text => this.changeFirstname(text)} />
+        </View>
+        <View>
+          <Text>Bonjour, je m'appelle {this.state.firstname} {this.state.lastname}</Text>
+        </View>
+
+        {schizophreniaList}
       </View>
     );
   }
@@ -42,19 +73,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 20
   },
-  text: {
-    color: 'red'
-  },
-  header: {
-    margin: 20,
-    padding: 15,
-    backgroundColor: 'blue',
-  },
-  headerText: {
-    color: 'white'
-  },
   input: {
     borderWidth: 1,
-    borderColor: '#777'
+    borderColor: '#777',
+    padding: 10
+  }, 
+  formInput: {
+    margin: 20
+  }, 
+  person: {
+    backgroundColor: 'pink',
+    color: 'white',
+    margin: 20,
+    padding: 20
   }
 });
